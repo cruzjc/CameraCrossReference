@@ -22,11 +22,11 @@ import java.util.List;
 
 
 
-public class TextRecognitionProcessor extends VisionProcessorBase<Text> {
+public class CameraCrossReference extends VisionProcessorBase<Text> {
     private static final String TAG = "TextRecProcessor";
 
     private final TextRecognizer textRecognizer;
-    public TextRecognitionProcessor(Context context) {
+    public CameraCrossReference(Context context) {
         super(context);
         textRecognizer=TextRecognition.getClient();
     }

@@ -41,6 +41,7 @@ import com.google.mlkit.vision.demo.CameraSource;
 import com.google.mlkit.vision.demo.CameraSourcePreview;
 import com.google.mlkit.vision.demo.GraphicOverlay;
 import com.google.mlkit.vision.demo.R;
+import com.google.mlkit.vision.demo.java.CameraCrossReference.CameraCrossReference;//JC WAS HERE
 import com.google.mlkit.vision.demo.java.barcodescanner.BarcodeScannerProcessor;
 import com.google.mlkit.vision.demo.java.facedetector.FaceDetectorProcessor;
 import com.google.mlkit.vision.demo.java.labeldetector.LabelDetectorProcessor;
@@ -186,7 +187,7 @@ public final class LivePreviewActivity extends AppCompatActivity
     try {
       switch (model) {
         case TEXT_RECOGNITION_CROSS_REFERENCE://JC WAS HERE
-          cameraSource.setMachineLearningFrameProcessor(new TextRecognitionProcessor(this));
+          cameraSource.setMachineLearningFrameProcessor(new CameraCrossReference(this));
           break;
 
         case OBJECT_DETECTION:

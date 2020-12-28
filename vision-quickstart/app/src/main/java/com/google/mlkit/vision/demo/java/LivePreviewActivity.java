@@ -76,6 +76,7 @@ public final class LivePreviewActivity extends AppCompatActivity
   private static final String IMAGE_LABELING_CUSTOM = "Custom Image Labeling (Bird)";
   private static final String CUSTOM_AUTOML_LABELING = "Custom AutoML Image Labeling (Flower)";
   private static final String POSE_DETECTION = "Pose Detection";
+  private static final String TEXT_RECOGNITION_CROSS_REFERENCE= "cross reference text recognition";//JC WAS HERE
 
   private static final String TAG = "LivePreviewActivity";
   private static final int PERMISSION_REQUESTS = 1;
@@ -103,6 +104,7 @@ public final class LivePreviewActivity extends AppCompatActivity
 
     Spinner spinner = findViewById(R.id.spinner);
     List<String> options = new ArrayList<>();
+    options.add(TEXT_RECOGNITION_CROSS_REFERENCE);//JC WAS HERE
     options.add(OBJECT_DETECTION);
     options.add(OBJECT_DETECTION_CUSTOM);
     options.add(CUSTOM_AUTOML_OBJECT_DETECTION);
@@ -183,6 +185,10 @@ public final class LivePreviewActivity extends AppCompatActivity
 
     try {
       switch (model) {
+        case TEXT_RECOGNITION_CROSS_REFERENCE://JC WAS HERE
+          cameraSource.setMachineLearningFrameProcessor(new TextRecognitionProcessor(this));
+          break;
+
         case OBJECT_DETECTION:
           Log.i(TAG, "Using Object Detector Processor");
           ObjectDetectorOptions objectDetectorOptions =

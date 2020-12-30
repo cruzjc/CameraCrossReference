@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class CsvHandler {
     public static String csvFile="csvsample.csv";
 
-    private static String[] getFirstColumnFromCsvFile(String csvFile){
+    public static String[] getFirstColumnFromCsvFile(String csvFile){
         ArrayList<String> columnList=new ArrayList<String>();
         String delimiter = ",";
         File file=new File(csvFile);
@@ -30,7 +30,7 @@ public class CsvHandler {
         return columnList.toArray(new String[0]);
     }
 
-    public int findRowContainingIntValue(String[] columnArray,String value){
+    public static int findRowContainingStringValue(String[] columnArray,String value){
         for(int i=0;i<columnArray.length;i++){
             if(columnArray[i].equals(value)){
                 return i;
@@ -61,15 +61,29 @@ public class CsvHandler {
         return result;
     }
 
+    public static String getReference(String csvFile, String value, int column){
+        try {
+            String[] firstColumn = getFirstColumnFromCsvFile(csvFile);
+            int rowResult = findRowContainingStringValue(firstColumn, value);
+            return getValueInColumn(csvFile, rowResult, 2);
+        }catch(Exception ex){
+            return "";
+        }
+    }
+
     public static void main(String[] args){
         System.out.println("testing");
-        String[] result = getFirstColumnFromCsvFile(csvFile);
-        for(String entry:result){
+        String[] firstColumn = getFirstColumnFromCsvFile(csvFile);
+        for(String entry:firstColumn){
             //System.out.println(entry);
         }
 
-        String value=getValueInColumn(csvFile,4,2);
-        //System.out.println(value);
+        int rowResult=findRowContainingStringValue(firstColumn, "r2");
+        //System.out.println(rowResult);
+
+        String value=getValueInColumn(csvFile,rowResult,2);
+        System.out.println(value);
+
     }
 
 }

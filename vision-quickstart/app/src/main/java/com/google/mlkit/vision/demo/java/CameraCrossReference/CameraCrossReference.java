@@ -21,7 +21,6 @@ import com.google.mlkit.vision.text.TextRecognizer;
 import java.util.List;
 
 
-
 public class CameraCrossReference extends VisionProcessorBase<Text> {
     private static final String TAG = "TextRecProcessor";
 
@@ -45,9 +44,11 @@ public class CameraCrossReference extends VisionProcessorBase<Text> {
 
     @Override
     protected void onSuccess(@NonNull Text text, @NonNull GraphicOverlay graphicOverlay){
-        Log.d(TAG,"text detected");
-        logExtrasForTesting(text);
-        graphicOverlay.add(new TextGraphic(graphicOverlay,text));
+        //Log.d(TAG,"text detected");
+        //logExtrasForTesting(text);
+        String referenceText="Found reference: "+
+                CsvHandler.getReference("csvsample.csv",text.getText(),4);
+        graphicOverlay.add(new CrossReferencedGraphic(graphicOverlay,referenceText));
     }
 
     private static void logExtrasForTesting(Text text){
